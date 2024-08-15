@@ -3,20 +3,23 @@ import { PostService } from 'services/post.service';
 import { PostType } from 'types/post';
 
 @inject(PostService)
-export class View {
+
+export class TagView {
     postService:PostService
-    post:PostType
+    posts:PostType
     error:string
+
     constructor(postService:PostService) {
         this.postService = postService
-    }
 
+    }
     activate(params) {
-        this.postService.find(params.slug).then((res) => {
+        console.log('params',params);
+        this.postService.postsByTag(params.tag).then((res) => {
             if(res['error']){
                 this.error = res['error']
             }else{
-                this.post = res['post']
+                this.posts = res['posts']
             }
         })
     }
