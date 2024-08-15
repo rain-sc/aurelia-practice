@@ -8,6 +8,7 @@ const project = require('./aurelia_project/aurelia.json');
 const { AureliaPlugin } = require('aurelia-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { ProvidePlugin } = require('webpack');
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
@@ -259,6 +260,12 @@ module.exports = ({ production }, { analyze, hmr, port, host }) => ({
      * remove those before the webpack build. In that case consider disabling the plugin, and instead use something like
      * `del` (https://www.npmjs.com/package/del), or `rimraf` (https://www.npmjs.com/package/rimraf).
      */
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      'window.$': 'jquery'
+    })
   ]
 });

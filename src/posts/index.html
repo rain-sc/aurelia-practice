@@ -1,0 +1,14 @@
+<template>
+  <article class="blog-post" repeat.for="post of posts">
+      <h2 class="display-5 link-body-emphasis mb-1">${post.title}</h2>
+      <p class="blog-post-meta">${post.createdAt} by <a href="#">${post.author}</a></p>
+      <p>
+        <a href="#" repeat.for="tag of post.tags">
+          <span class="badge text-bg-info">${tag}</span>
+        </a>
+      </p>
+      <p>${post.body}</p>
+    <a route-href="route: post-view; params.bind:{slug: post.slug}">View Post &raquo;</a>
+    <hr>
+  </article>
+</template>
