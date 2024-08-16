@@ -6,7 +6,7 @@ export class AuthService{
     constructor(){
         this.delay = 100
         this.currentUser = null
-        this.users = ['rain']
+        this.users = ['rain','Doe']
     }
 
     login(name) {
@@ -16,7 +16,7 @@ export class AuthService{
                     this.currentUser = name;
                     resolve({ user: name });
                 } else {
-                    resolve({ error: 'Invalid credentials.' });
+                    reject({ message: 'Invalid credentials.' });
                 }
             }, this.delay);
         });
@@ -27,7 +27,7 @@ export class AuthService{
             setTimeout(() => {
                 this.currentUser = null;
                 if (this.currentUser) {
-                    resolve({ error: 'Error logging out.' });
+                    reject({ error: 'Error logging out.' });
                 } else {
                     resolve({ success: true });
                 }
